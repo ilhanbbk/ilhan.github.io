@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Media Carousel</title>
+
+<style>
+  body {
+    background: #111;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+  }
+
+  .carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 40px auto;
+  }
+
+  img, video {
+    width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+  }
+
+  .left { left: -60px; }
+  .right { right: -60px; }
+</style>
+</head>
+
+<body>
+
+<h2>Media Carousel</h2>
+
+<div class="carousel">
+  <button class="arrow left" onclick="prev()">&#8592;</button>
+
+  <div id="media-container"></div>
+
+  <button class="arrow right" onclick="next()">&#8594;</button>
+</div>
+
+<script>
+const files = [
+"pics/20231129_222042.jpg",
+"pics/20231130_085619.jpg",
+"pics/20231130_093951.jpg",
+"pics/20231130_175257.jpg",
+"pics/20231201_154058.jpg",
+"pics/20231201_161707.jpg",
+"pics/20231202_112204.jpg",
+"pics/20240117_213723.jpg",
+"pics/20240306_105650.jpg",
+"pics/20240322_165253.jpg",
+"pics/20240322_183453.jpg",
+"pics/20240402_184137.jpg",
+"pics/20240414_190138.jpg",
+"pics/20240503_211231.jpg",
+"pics/20240510_163753(0).jpg",
+"pics/20240525_173948.jpg",
+"pics/20240613_181758.jpg",
+"pics/20240614_173910.jpg",
+"pics/20240620_134024.jpg",
+"pics/20240622_095315.jpg",
+"pics/20240718_045944.jpg",
+"pics/20240720_173246.jpg",
+"pics/20240816_203459.jpg",
+"pics/20240924_122653.jpg",
+"pics/20241017_144854.jpg",
+"pics/20241023_160022.jpg",
+"pics/20241220_170728.jpg",
+"pics/20241226_185243.jpg",
+"pics/20250221_162528.jpg",
+"pics/20250519_190630.jpg",
+"pics/20250613_181710.jpg",
+"pics/20250613_200246.jpg",
+"pics/20250619_113648.jpg",
+"pics/20250619_234940.jpg",
+"pics/20250620_113444.jpg",
+"pics/20250620_134212.jpg",
+"pics/20250620_181018.jpg",
+"pics/20250729_114241.jpg",
+"pics/20250802_173614.jpg",
+"pics/20250809_192157.jpg",
+"pics/20250822_230632.jpg",
+"pics/20250909_183536.jpg",
+"pics/20250926_130437.mp4",
+"pics/20251002_182713.mp4",
+"pics/20251002_184530.jpg",
+"pics/20251010_113324.jpg",
+"pics/20251028_122936.jpg",
+"pics/20251031_200322.jpg",
+"pics/20251107_170141.jpg",
+"pics/20260114_204704.jpg",
+"pics/20260227_182314.jpg",
+"pics/20260313_174723.jpg",
+"pics/3366960c-8772-46c2-bcd1-83994b14320b.jpg",
+"pics/5858dffa-2259-401a-8558-cc2782a5a341.jpg",
+"pics/IMG-20240312-WA0000.jpg",
+"pics/IMG-20240613-WA0020.jpg",
+"pics/IMG-20240613-WA0021.jpg",
+"pics/IMG-20260124-WA0003.jpg",
+"pics/IMG_20240813_134932_045.jpg",
+"pics/a8899539-f6ea-4b82-b79a-a19ce9978da7.jpg",
+"pics/caaa2987-ebd9-4c00-9e9c-081f859f8f8e.jpg",
+"pics/fa58bf4c-4c05-46e1-bcab-796eec7f9dc2.jpg",
+"pics/openart-image_Q6gtGdn4_1751759052324_raw.jpg"
+];
+
+let index = 0;
+const container = document.getElementById("media-container");
+
+function showMedia() {
+  const file = files[index];
+
+  // Clear previous
+  container.innerHTML = "";
+
+  if (file.endsWith(".mp4")) {
+    const video = document.createElement("video");
+    video.src = file;
+    video.controls = true;
+    video.autoplay = true;
+    container.appendChild(video);
+  } else {
+    const img = document.createElement("img");
+    img.src = file;
+    container.appendChild(img);
+  }
+}
+
+function next() {
+  index = (index + 1) % files.length;
+  showMedia();
+}
+
+function prev() {
+  index = (index - 1 + files.length) % files.length;
+  showMedia();
+}
+
+// Init
+showMedia();
+</script>
+
+</body>
+</html>
